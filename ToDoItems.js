@@ -7,9 +7,9 @@ const ToDoItems = () => {
 
   const Task = ({item}) => {
     return (
-      <View key={item.key}>
+      <View style={styles.rowContainer} key={item.key}>
         <View style={styles.ToDoListMainListItem}>
-          <Text>{item.text}</Text>
+          <Text style={styles.listItemText}>{item.text}</Text>
         </View>
 
         <TouchableOpacity
@@ -32,31 +32,10 @@ const ToDoItems = () => {
 
 export default ToDoItems;
 const styles = StyleSheet.create({
-  container: {
-    paddingTop: 50,
-    backgroundColor: '#80D39B',
-    color: '#888',
-    height: 1200,
-  },
   rowContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-evenly',
-    margin: 15,
-  },
-  largeText: {
-    fontSize: 30,
-    marginBottom: 15,
-    marginLeft: 15,
-  },
-  submitButton: {
-    padding: 5,
-    margin: 15,
-    backgroundColor: '#7C77B9',
-    borderRadius: 7,
-    borderWidth: 2,
-    borderColor: '#7C77B9',
-    width: 100,
-    height: 60,
+    justifyContent: 'center',
+    marginLeft: 30,
   },
   submitButtonText: {
     flexDirection: 'row',
@@ -65,18 +44,6 @@ const styles = StyleSheet.create({
     fontSize: 25,
     marginTop: 10,
     color: '#fff',
-  },
-  ToDoListMainHeaderInput: {
-    padding: 5,
-    margin: 15,
-    fontSize: 25,
-    borderRadius: 7,
-    borderWidth: 2,
-    borderColor: '#ffffff',
-    color: '#7C77B9',
-    backgroundColor: '#ffffff',
-    width: 250,
-    height: 60,
   },
   deleteButton: {
     padding: 5,
@@ -94,12 +61,17 @@ const styles = StyleSheet.create({
     borderColor: 'rgba(255,255,255,0.2)',
     margin: 15,
     padding: 5,
-    fontSize: 50,
     borderRadius: 7,
     borderWidth: 2,
     width: 250,
-    height: 60,
+    lineHeight: 60,
     textAlign: 'center',
     justifyContent: 'center',
+  },
+  listItemText: {
+    paddingLeft: 10,
+    fontSize: 25,
+    margin: 5,
+    color: '#7C77B9',
   },
 });

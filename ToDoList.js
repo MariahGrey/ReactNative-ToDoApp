@@ -5,8 +5,10 @@ import {
   TouchableOpacity,
   TextInput,
   StyleSheet,
+  ScrollView,
 } from 'react-native';
 import ToDoItems from './ToDoItems.js';
+import CountItems from './CountItems.js';
 
 export const ToDoItemsContext = createContext({
   items: [],
@@ -26,7 +28,6 @@ const ToDoList = () => {
       text: inputValue,
       key: Date.now(),
     };
-    console.log(inputValue);
     const newItemsArray = items.concat(newItem);
     setItems(newItemsArray);
     setInputValue('');
@@ -34,7 +35,6 @@ const ToDoList = () => {
 
   const deleteItem = (key) => {
     const filteredItems = items.filter((item) => {
-      console.log('deleted item: ' + item.key);
       return item.key !== key;
     });
 
@@ -43,9 +43,12 @@ const ToDoList = () => {
 
   return (
     <ToDoItemsContext.Provider value={{items, deleteItem}}>
-      <View style={styles.container}>
-        <Text style={styles.largeText}>To Do App</Text>
-        <View style={styles.rowContainer}>
+      <ScrollView style={styles.container}>
+        <View style={styles.rowContainerSpaceBetween}>
+          <Text style={styles.largeText}>To Do App</Text>
+          <CountItems />
+        </View>
+        <View style={styles.rowContainerSpaceEven}>
           <TextInput
             style={styles.ToDoListMainHeaderInput}
             value={inputValue}
@@ -57,12 +60,10 @@ const ToDoList = () => {
             <Text style={styles.submitButtonText}>Add</Text>
           </TouchableOpacity>
         </View>
-        <View style={styles.container}>
-          <View style={styles.rowContainer}>
-            <ToDoItems styles={styles.ToDoListMainListItem} />
-          </View>
+        <View>
+          <ToDoItems />
         </View>
-      </View>
+      </ScrollView>
     </ToDoItemsContext.Provider>
   );
 };
@@ -70,25 +71,27 @@ const ToDoList = () => {
 export default ToDoList;
 
 const styles = StyleSheet.create({
-  borderRadius: {
-    borderRadius: 7,
-    borderWidth: 2,
-  },
   container: {
     paddingTop: 50,
     backgroundColor: '#80D39B',
     color: '#888',
     height: 1200,
   },
-  rowContainer: {
+  rowContainerSpaceBetween: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    margin: 15,
+  },
+  rowContainerSpaceEven: {
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     margin: 15,
   },
   largeText: {
-    fontSize: 30,
-    marginBottom: 15,
-    marginLeft: 15,
+    fontSize: 50,
+    marginTop: 20,
+    marginLeft: 25,
+    color: '#fff',
   },
   submitButton: {
     padding: 5,
@@ -117,28 +120,7 @@ const styles = StyleSheet.create({
     borderColor: '#ffffff',
     color: '#7C77B9',
     backgroundColor: '#ffffff',
-    width: 250,
-    height: 60,
-  },
-  deleteButton: {
-    padding: 5,
-    margin: 15,
-    backgroundColor: '#7C77B9',
-    borderRadius: 7,
-    borderWidth: 2,
-    borderColor: '#7C77B9',
-    width: 60,
-    height: 60,
-  },
-  ToDoListMainListItem: {
-    color: '#7C77B9',
-    backgroundColor: 'rgba(255,255,255,0.5)',
-    borderColor: 'rgba(255,255,255,0.2)',
-    margin: 15,
-    padding: 5,
-    fontSize: 75,
-    borderRadius: 7,
-    borderWidth: 2,
+    paddingLeft: 10,
     width: 250,
     height: 60,
   },
