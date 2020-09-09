@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
   },
   counter: {
     color: '#7C77B9',
-    backgroundColor: 'rgba(255,255,255,0.5)',
+    backgroundColor: 'rgba(255,255,255,0.3)',
     borderColor: 'rgba(255,255,255,0.2)',
     padding: 5,
     margin: 15,
@@ -40,6 +40,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 25,
     margin: 10,
-    color: '#7C77B9',
+    color: '#fff',
   },
 });

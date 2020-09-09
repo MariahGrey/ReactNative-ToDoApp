@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import ToDoItems from './ToDoItems.js';
 import CountItems from './CountItems.js';
+import {Header} from 'react-native-elements';
 
 export const ToDoItemsContext = createContext({
   items: [],
@@ -43,11 +44,13 @@ const ToDoList = () => {
 
   return (
     <ToDoItemsContext.Provider value={{items, deleteItem}}>
+      <Header
+        placement="left"
+        containerStyle={{backgroundColor: '#7C77B9', height: 200}}
+        leftComponent={{text: 'To Do App', style: styles.largeText}}
+        rightComponent={<CountItems />}
+      />
       <ScrollView style={styles.container}>
-        <View style={styles.rowContainerSpaceBetween}>
-          <Text style={styles.largeText}>To Do App</Text>
-          <CountItems />
-        </View>
         <View style={styles.rowContainerSpaceEven}>
           <TextInput
             style={styles.ToDoListMainHeaderInput}
@@ -72,15 +75,8 @@ export default ToDoList;
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 50,
-    backgroundColor: '#80D39B',
-    color: '#888',
+    backgroundColor: '#C2E7D9',
     height: 1200,
-  },
-  rowContainerSpaceBetween: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    margin: 15,
   },
   rowContainerSpaceEven: {
     flexDirection: 'row',
@@ -88,8 +84,7 @@ const styles = StyleSheet.create({
     margin: 15,
   },
   largeText: {
-    fontSize: 50,
-    marginTop: 20,
+    fontSize: 40,
     marginLeft: 25,
     color: '#fff',
   },
@@ -125,6 +120,3 @@ const styles = StyleSheet.create({
     height: 60,
   },
 });
-
-// Font color wrong, font size wrong, X button needs
-// to be in same row as task it corresponds to.
