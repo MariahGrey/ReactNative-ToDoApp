@@ -1,14 +1,9 @@
 import React, {useState, createContext} from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  TextInput,
-  StyleSheet,
-  ScrollView,
-} from 'react-native';
+import {View} from 'react-native';
 import ToDoItems from './ToDoItems.js';
 import CountItems from './CountItems.js';
+import {Header} from 'react-native-elements';
+import styled from 'styled-components';
 
 export const ToDoItemsContext = createContext({
   items: [],
@@ -43,88 +38,86 @@ const ToDoList = () => {
 
   return (
     <ToDoItemsContext.Provider value={{items, deleteItem}}>
-      <ScrollView style={styles.container}>
-        <View style={styles.rowContainerSpaceBetween}>
-          <Text style={styles.largeText}>To Do App</Text>
-          <CountItems />
-        </View>
-        <View style={styles.rowContainerSpaceEven}>
-          <TextInput
-            style={styles.ToDoListMainHeaderInput}
+      <StyledHeader
+        placement="left"
+        leftComponent={<HeaderText>To Do App</HeaderText>}
+        rightComponent={<CountItems />}
+      />
+      <Container>
+        <RowContainer>
+          <ToDoListMainHeaderInput
             value={inputValue}
             onChangeText={(value) => setInputValue(value)}
             placeholder="Enter Task"
-            placeholderTextColor="#7C77B9"
           />
-          <TouchableOpacity style={styles.submitButton} onPress={addItem}>
-            <Text style={styles.submitButtonText}>Add</Text>
-          </TouchableOpacity>
-        </View>
+          <SubmitButton onPress={addItem}>
+            <SubmitButtonText>Add</SubmitButtonText>
+          </SubmitButton>
+        </RowContainer>
         <View>
           <ToDoItems />
         </View>
-      </ScrollView>
+      </Container>
     </ToDoItemsContext.Provider>
   );
 };
 
 export default ToDoList;
 
-const styles = StyleSheet.create({
-  container: {
-    paddingTop: 50,
-    backgroundColor: '#80D39B',
-    color: '#888',
-    height: 1200,
-  },
-  rowContainerSpaceBetween: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    margin: 15,
-  },
-  rowContainerSpaceEven: {
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
-    margin: 15,
-  },
-  largeText: {
-    fontSize: 50,
-    marginTop: 20,
-    marginLeft: 25,
-    color: '#fff',
-  },
-  submitButton: {
-    padding: 5,
-    margin: 15,
+const StyledHeader = styled(Header).attrs({
+  containerStyle: {
     backgroundColor: '#7C77B9',
-    borderRadius: 7,
-    borderWidth: 2,
-    borderColor: '#7C77B9',
-    width: 100,
-    height: 60,
+    height: 200,
   },
-  submitButtonText: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    fontSize: 25,
-    marginLeft: 20,
-    marginTop: 10,
-    color: '#fff',
-  },
-  ToDoListMainHeaderInput: {
-    padding: 5,
-    margin: 15,
-    fontSize: 25,
-    borderRadius: 7,
-    borderWidth: 2,
-    borderColor: '#ffffff',
-    color: '#7C77B9',
-    backgroundColor: '#ffffff',
-    paddingLeft: 10,
-    width: 250,
-    height: 60,
-  },
-});
+})``;
 
-// Font color wrong, font size wrong, X button needs
-// to be in same row as task it corresponds to.
+const HeaderText = styled.Text`
+  font-size: 40px;
+  margin-left: 25px;
+  color: #fff;
+`;
+
+const RowContainer = styled.View`
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin: 15px;
+`;
+
+const SubmitButtonText = styled.Text`
+  flex-direction: row;
+  justify-content: center;
+  font-size: 25px;
+  margin-top: 10px;
+  margin-left: 20px;
+  color: #fff;
+`;
+
+const Container = styled.ScrollView`
+  background-color: #c2e7d9;
+  height: 1200px;
+`;
+
+const ToDoListMainHeaderInput = styled.TextInput`
+  padding: 5px;
+  margin: 15px;
+  font-size: 25px;
+  border-radius: 7px;
+  border-width: 2px;
+  border-color: #fff;
+  color: #7c77b9;
+  background-color: #fff;
+  padding-left: 10px;
+  width: 250px;
+  height: 60px;
+`;
+
+const SubmitButton = styled.TouchableOpacity`
+  padding: 5px;
+  margin: 15px;
+  background-color: #7c77b9;
+  border-radius: 7px;
+  border-width: 2px;
+  border-color: #7c77b9;
+  width: 100px;
+  height: 60px;
+`;

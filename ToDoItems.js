@@ -1,23 +1,22 @@
 import React, {useContext} from 'react';
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {View, Text} from 'react-native';
 import {ToDoItemsContext} from './ToDoList';
+import styled from 'styled-components';
 
 const ToDoItems = () => {
   const {items: entries, deleteItem: deleteTask} = useContext(ToDoItemsContext);
 
   const Task = ({item}) => {
     return (
-      <View style={styles.rowContainer} key={item.key}>
-        <View style={styles.ToDoListMainListItem}>
-          <Text style={styles.listItemText}>{item.text}</Text>
-        </View>
+      <RowContainer key={item.key}>
+        <ToDoListMainListItem>
+          <ListItemText>{item.text}</ListItemText>
+        </ToDoListMainListItem>
 
-        <TouchableOpacity
-          style={styles.deleteButton}
-          onPress={() => deleteTask(item.key)}>
-          <Text style={styles.submitButtonText}>X</Text>
-        </TouchableOpacity>
-      </View>
+        <DeleteButton onPress={() => deleteTask(item.key)}>
+          <SubmitButtonText>X</SubmitButtonText>
+        </DeleteButton>
+      </RowContainer>
     );
   };
 
@@ -31,47 +30,50 @@ const ToDoItems = () => {
 };
 
 export default ToDoItems;
-const styles = StyleSheet.create({
-  rowContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    marginLeft: 30,
-  },
-  submitButtonText: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    textAlign: 'center',
-    fontSize: 25,
-    marginTop: 10,
-    color: '#fff',
-  },
-  deleteButton: {
-    padding: 5,
-    margin: 15,
-    backgroundColor: '#7C77B9',
-    borderRadius: 7,
-    borderWidth: 2,
-    borderColor: '#7C77B9',
-    width: 60,
-    height: 60,
-  },
-  ToDoListMainListItem: {
-    color: '#7C77B9',
-    backgroundColor: 'rgba(255,255,255,0.5)',
-    borderColor: 'rgba(255,255,255,0.2)',
-    margin: 15,
-    padding: 5,
-    borderRadius: 7,
-    borderWidth: 2,
-    width: 250,
-    lineHeight: 60,
-    textAlign: 'center',
-    justifyContent: 'center',
-  },
-  listItemText: {
-    paddingLeft: 10,
-    fontSize: 25,
-    margin: 5,
-    color: '#7C77B9',
-  },
-});
+
+const RowContainer = styled.View`
+  flex-direction: row;
+  justify-content: center;
+  margin-left: 30px;
+`;
+
+const SubmitButtonText = styled.Text`
+  flex-direction: row;
+  justify-content: center;
+  text-align: center;
+  font-size: 25px;
+  margin-top: 10px;
+  color: #fff;
+`;
+
+const DeleteButton = styled.TouchableOpacity`
+  padding: 5px;
+  margin: 15px;
+  background-color: #7c77b9;
+  border-radius: 7px;
+  border-width: 2px;
+  border-color: #7c77b9;
+  width: 60px;
+  height: 60px;
+`;
+
+const ToDoListMainListItem = styled.View`
+  color: #7c77b9;
+  background-color: 'rgba(255,255,255,0.5)';
+  border-color: 'rgba(255,255,255,0.2)';
+  margin: 15px;
+  padding: 5px;
+  border-radius: 7px;
+  border-width: 2px;
+  width: 250px;
+  line-height: 60px;
+  text-align: center;
+  justify-content: center;
+`;
+
+const ListItemText = styled.Text`
+  padding-left: 10px;
+  font-size: 25px;
+  margin: 5px;
+  color: #7c77b9;
+`;
