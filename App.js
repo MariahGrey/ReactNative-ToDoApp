@@ -1,6 +1,5 @@
 import React from 'react';
 import ToDoList from './ToDoList.js';
-import {Text} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import styled from 'styled-components';
