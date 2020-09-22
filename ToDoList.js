@@ -19,10 +19,7 @@ const ToDoList = () => {
       return null;
     }
 
-    const newItem = {
-      text: inputValue,
-      key: Date.now(),
-    };
+    const newItem = {text: inputValue, key: Date.now()};
     const newItemsArray = items.concat(newItem);
     setItems(newItemsArray);
     setInputValue('');
